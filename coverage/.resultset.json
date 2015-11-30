@@ -1,0 +1,19 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/mbburch/turing/4-module/projects/ideabox/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/mbburch/turing/4-module/projects/ideabox/app/models/idea.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        null
+      ]
+    },
+    "timestamp": 1448920882
+  }
+}
