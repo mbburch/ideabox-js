@@ -16,4 +16,8 @@ RSpec.describe Idea, type: :model do
     idea.body = nil
     expect(idea).to_not be_valid
   end
+
+  it "has a default quality of swill" do
+    expect(idea.quality).to eq("Swill")
+  end
 end
