@@ -8,20 +8,20 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'materialize-sass', '0.97.3'
 gem 'responders'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'faker'
+gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
 
 group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
-end
-
-group :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'simplecov'
+  gem 'shoulda-matchers'
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'
