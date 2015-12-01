@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Idea, type: :model do
-  let(:idea) { Idea.new(title: "First Idea", body: "This is my first idea.") }
+  let!(:idea) { Idea.new(title: "First Idea", body: "This is my first idea.") }
 
   it "should be valid" do
     expect(idea).to be_valid

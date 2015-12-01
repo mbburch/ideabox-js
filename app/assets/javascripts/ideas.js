@@ -16,14 +16,24 @@ function fetchIdeas(){
 
 function renderIdea(idea){
   $('#all-ideas').prepend(
-    "<div class='idea' data-id='"
+    "<div class='card blue-grey darken-2'>"
+    + "<div class='card-content white-text'>"
+    + "<div class='idea' data-id='"
     + idea.id
-    + "'><h4 class='idea-title'>"
+    + "'><span class='card-title center'>"
     + idea.title
-    + "</h4><p class='idea-body'>"
-    + idea.body
+    + "</span><p class='idea-body'>"
+    + truncateBody(idea.body)
     + "</p><p class='idea-quality'>Quality: "
     + idea.quality
-    + "</p>"
+    + "</p></div></div>"
   )
+};
+
+function truncateBody(body) {
+  if (body.length > 100) {
+    return body.slice(0, 100) + '...'
+  } else {
+    return body
+  }
 };
