@@ -24,7 +24,7 @@ function renderIdea(idea){
     + idea.title
     + "</span><p class='idea-body'>"
     + truncateBody(idea.body)
-    + "</p><p class='idea-quality'>Quality: "
+    + "</p><p class='idea-quality'><strong>Quality:</strong> "
     + idea.quality
     + "</p></div></div>"
   )
