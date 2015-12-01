@@ -24,7 +24,6 @@
         1,
         null,
         1,
-        2,
         null,
         null
       ],
@@ -34,8 +33,14 @@
         null,
         1,
         null
+      ],
+      "/Users/mbburch/turing/4-module/projects/ideabox/app/controllers/public_controller.rb": [
+        0,
+        0,
+        0,
+        0
       ]
     },
-    "timestamp": 1448936157
+    "timestamp": 1448940840
   }
 }
