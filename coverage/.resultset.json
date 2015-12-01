@@ -15,8 +15,17 @@
         1,
         null,
         1,
-        12,
+        23,
         null,
+        null
+      ],
+      "/Users/mbburch/turing/4-module/projects/ideabox/app/controllers/public_controller.rb": [
+        1,
+        null
+      ],
+      "/Users/mbburch/turing/4-module/projects/ideabox/app/controllers/application_controller.rb": [
+        1,
+        1,
         null
       ],
       "/Users/mbburch/turing/4-module/projects/ideabox/app/controllers/api/v1/ideas_controller.rb": [
@@ -24,25 +33,28 @@
         1,
         null,
         1,
-        4,
+        6,
         null,
-        null
-      ],
-      "/Users/mbburch/turing/4-module/projects/ideabox/app/controllers/application_controller.rb": [
+        null,
+        1,
+        2,
+        null,
+        null,
         1,
         null,
         null,
         1,
-        null
-      ],
-      "/Users/mbburch/turing/4-module/projects/ideabox/app/controllers/public_controller.rb": [
         1,
+        null,
+        null,
+        1,
+        null,
         1,
         2,
         null,
         null
       ]
     },
-    "timestamp": 1449002039
+    "timestamp": 1449012870
   }
 }
