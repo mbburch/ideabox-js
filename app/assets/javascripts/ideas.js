@@ -16,14 +16,16 @@ function fetchIdeas(){
 
 function renderIdea(idea){
   $('#all-ideas').prepend(
-    "<div class='idea' data-id='"
+    "<div class='card blue-grey darken-1'>"
+    + "<div class='card-content white-text'>"
+    + "<div class='idea' data-id='"
     + idea.id
-    + "'><h4 class='idea-title'>"
+    + "'><span class='card-title center'>"
     + idea.title
-    + "</h4><p class='idea-body'>"
+    + "</span><p class='idea-body'>"
     + idea.body
     + "</p><p class='idea-quality'>Quality: "
     + idea.quality
-    + "</p>"
+    + "</p></div></div>"
   )
 };
