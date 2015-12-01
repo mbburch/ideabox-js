@@ -12,8 +12,24 @@
         null,
         1,
         null
+      ],
+      "/Users/mbburch/turing/4-module/projects/ideabox/app/controllers/api/v1/ideas_controller.rb": [
+        1,
+        1,
+        null,
+        1,
+        2,
+        null,
+        null
+      ],
+      "/Users/mbburch/turing/4-module/projects/ideabox/app/controllers/application_controller.rb": [
+        1,
+        null,
+        null,
+        1,
+        null
       ]
     },
-    "timestamp": 1448921111
+    "timestamp": 1448934883
   }
 }
