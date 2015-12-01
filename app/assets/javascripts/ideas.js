@@ -16,7 +16,7 @@ function fetchIdeas(){
 
 function renderIdea(idea){
   $('#all-ideas').prepend(
-    "<div class='card blue-grey darken-1'>"
+    "<div class='card blue-grey darken-2'>"
     + "<div class='card-content white-text'>"
     + "<div class='idea' data-id='"
     + idea.id
