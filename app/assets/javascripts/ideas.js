@@ -23,9 +23,17 @@ function renderIdea(idea){
     + "'><span class='card-title center'>"
     + idea.title
     + "</span><p class='idea-body'>"
-    + idea.body
+    + truncateBody(idea.body)
     + "</p><p class='idea-quality'>Quality: "
     + idea.quality
     + "</p></div></div>"
   )
+};
+
+function truncateBody(body) {
+  if (body.length > 100) {
+    return body.slice(0, 100) + '...'
+  } else {
+    return body
+  }
 };
