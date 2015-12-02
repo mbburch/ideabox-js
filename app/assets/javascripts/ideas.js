@@ -22,11 +22,11 @@ function fetchIdeas(){
 
 function renderIdea(idea){
   $('#all-ideas').prepend(
-    "<div class='card blue-grey darken-2'>"
-    + "<div class='card-content white-text'>"
-    + "<div class='idea' data-id='"
+    "<div class='idea card blue-grey darken-2' data-id='"
     + idea.id
-    + "'><span class='card-title center'>"
+    + "'>"
+    + "<div class='card-content white-text'>"
+    + "<span class='card-title center'>"
     + idea.title
     + "</span><p class='idea-body'>"
     + truncateBody(idea.body)
@@ -34,7 +34,7 @@ function renderIdea(idea){
     + idea.quality
     + "</p><div class='buttons'>"
     + "<button id='delete-idea' class='btn btn-default'>Delete</button>"
-    + "</div></div></div></div>"
+    + "</div></div></div>"
   )
 };
 
@@ -47,8 +47,8 @@ function truncateBody(body) {
 };
 
 function createIdea() {
-  $('#create-idea').on('click', function(){
-
+  $('#create-idea').on('click', function(event){
+    event.preventDefault();
     var ideaTitle  = $('#title').val()
     var ideaBody   = $('#body').val()
     var ideaParams = {
@@ -69,7 +69,7 @@ function createIdea() {
         fetchIdeas()
       },
       error: function(idea){
-        debugger
+        console.log('Does your idea have a title and body?')
       }
     });
   });
@@ -77,7 +77,6 @@ function createIdea() {
 
 function deleteIdea(){
   $('#all-ideas').delegate('#delete-idea', 'click', function(){
-    debugger
     var $idea = $(this).closest('.idea')
     $.ajax({
       type: 'DELETE',
