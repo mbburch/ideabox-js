@@ -11,9 +11,9 @@ RSpec.feature "User visits page" do
   end
 
   scenario "and sees all ideas", js: :true do
-    idea1 = Idea.create(title: "My First Idea", body: "This is my first idea")
-    idea2 = Idea.create(title: "My Second Idea", body: "This is my second idea", quality: 1)
-    idea3 = Idea.create(title: "My Third Idea", body: "This is my third idea", quality: 2)
+    idea1 = Idea.create!(title: "My First Idea", body: "This is my first idea")
+    idea2 = Idea.create!(title: "My Second Idea", body: "This is my second idea", quality: 1)
+    idea3 = Idea.create!(title: "My Third Idea", body: "This is my third idea", quality: 2)
 
     visit root_path
 
@@ -25,9 +25,9 @@ RSpec.feature "User visits page" do
   end
 
   scenario "and adds a new idea", js: :true do
-    idea1 = Idea.create(title: "My First Idea", body: "This is my first idea")
-    idea2 = Idea.create(title: "My Second Idea", body: "This is my second idea", quality: 1)
-    idea3 = Idea.create(title: "My Third Idea", body: "This is my third idea", quality: 2)
+    idea1 = Idea.create!(title: "My First Idea", body: "This is my first idea")
+    idea2 = Idea.create!(title: "My Second Idea", body: "This is my second idea", quality: 1)
+    idea3 = Idea.create!(title: "My Third Idea", body: "This is my third idea", quality: 2)
 
     visit root_path
 
@@ -39,5 +39,23 @@ RSpec.feature "User visits page" do
     expect(current_path).to eq(root_path)
     expect(page).to have_content("New Idea Title")
     expect(page).to have_content("New idea body.")
+  end
+
+  scenario "and searches for ideas", js: :true do
+    idea1 = Idea.create!(title: "My First Idea", body: "This is my first idea")
+    idea2 = Idea.create!(title: "My Second Idea", body: "This is my second idea", quality: 1)
+    idea3 = Idea.create!(title: "My Third Idea", body: "This is my third idea", quality: 2)
+
+    visit root_path
+    expect(page).to have_content("My First Idea")
+    expect(page).to have_content("My Second Idea")
+    expect(page).to have_content("My Third Idea")
+    expect(page).to have_css("#search")
+
+    fill_in "search", with: "Firs"
+
+    expect(page).to have_content("My First Idea")
+    expect(page).to_not have_content("My Second Idea")
+    expect(page).to_not have_content("My Third Idea")
   end
 end
