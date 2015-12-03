@@ -4,7 +4,7 @@ class Idea < ActiveRecord::Base
   validates :title, presence: true
   validates :body, presence: true
 
-  enum quality: %w(Swill Plausible Genius)
+  enum quality: %w(swill plausible genius)
 
   def titleize
     self.title = title.to_s.titleize

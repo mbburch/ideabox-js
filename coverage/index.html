@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-12-01T21:49:39-07:00">2015-12-01T21:49:39-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-12-02T21:25:15-07:00">2015-12-02T21:25:15-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.46
+         3.31
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>5</b> files in total.
-    <b>23</b> relevant lines. 
-    <span class="green"><b>23</b> lines covered</span> and
+    <b>24</b> relevant lines. 
+    <span class="green"><b>24</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -53,11 +53,11 @@
       <tr>
         <td class="strong"><a href="#934ca25fcb05392d97d11dcbe0ddd623bab16056" class="src_link" title="app/controllers/api/v1/ideas_controller.rb">app/controllers/api/v1/ideas_controller.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>24</td>
-        <td>12</td>
-        <td>12</td>
+        <td>25</td>
+        <td>13</td>
+        <td>13</td>
         <td>0</td>
-        <td>1.7</td>
+        <td>2.2</td>
       </tr>
       
       <tr>
@@ -97,7 +97,7 @@
         <td>7</td>
         <td>7</td>
         <td>0</td>
-        <td>4.6</td>
+        <td>6.7</td>
       </tr>
       
     </tbody>
@@ -113,15 +113,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.56
+         1.98
        </span>
     </span> hits/line)
   </h2>
   <a name="Controllers"></a>
   <div>
     <b>3</b> files in total.
-    <b>15</b> relevant lines. 
-    <span class="green"><b>15</b> lines covered</span> and
+    <b>16</b> relevant lines. 
+    <span class="green"><b>16</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -141,11 +141,11 @@
       <tr>
         <td class="strong"><a href="#934ca25fcb05392d97d11dcbe0ddd623bab16056" class="src_link" title="app/controllers/api/v1/ideas_controller.rb">app/controllers/api/v1/ideas_controller.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>24</td>
-        <td>12</td>
-        <td>12</td>
+        <td>25</td>
+        <td>13</td>
+        <td>13</td>
         <td>0</td>
-        <td>1.7</td>
+        <td>2.2</td>
       </tr>
       
       <tr>
@@ -180,7 +180,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         4.6
+         6.7
        </span>
     </span> hits/line)
   </h2>
@@ -212,7 +212,7 @@
         <td>7</td>
         <td>7</td>
         <td>0</td>
-        <td>4.6</td>
+        <td>6.7</td>
       </tr>
       
     </tbody>
@@ -356,8 +356,8 @@
     <h3>app/controllers/api/v1/ideas_controller.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>12</b> relevant lines. 
-      <span class="green"><b>12</b> lines covered</span> and
+      <b>13</b> relevant lines. 
+      <span class="green"><b>13</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -389,8 +389,8 @@
           <code class="ruby">  def index</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="5">
-          <span class="hits">7</span>
+        <li class="covered" data-hits="9" data-linenumber="5">
+          <span class="hits">9</span>
           
           <code class="ruby">    respond_with Idea.all.order(&quot;created_at asc&quot;)</code>
         </li>
@@ -413,8 +413,8 @@
           <code class="ruby">  def create</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="9">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="4" data-linenumber="9">
+          <span class="hits">4</span>
           
           <code class="ruby">    respond_with :api, :v1, Idea.create(idea_params)</code>
         </li>
@@ -437,73 +437,79 @@
           <code class="ruby">  def update</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="13">
+        <li class="covered" data-hits="1" data-linenumber="13">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    respond_with Idea.update(params[:id], idea_params)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="14">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="15">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="15">
           
-          <code class="ruby">  def destroy</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="16">
           <span class="hits">1</span>
           
-          <code class="ruby">    respond_with Idea.delete(params[:id])</code>
+          <code class="ruby">  def destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="17">
+        <li class="covered" data-hits="2" data-linenumber="17">
+          <span class="hits">2</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    respond_with Idea.delete(params[:id])</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="18">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="19">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="19">
+        <li class="covered" data-hits="1" data-linenumber="20">
           <span class="hits">1</span>
           
           <code class="ruby">  private</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="20">
+        <li class="never" data-hits="" data-linenumber="21">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="21">
+        <li class="covered" data-hits="1" data-linenumber="22">
           <span class="hits">1</span>
           
           <code class="ruby">  def idea_params</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="22">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="5" data-linenumber="23">
+          <span class="hits">5</span>
           
           <code class="ruby">    params.require(:idea).permit(:title, :body, :quality)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="23">
+        <li class="never" data-hits="" data-linenumber="24">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="24">
+        <li class="never" data-hits="" data-linenumber="25">
           
           
           <code class="ruby">end</code>
@@ -662,7 +668,7 @@
         <li class="covered" data-hits="1" data-linenumber="7">
           <span class="hits">1</span>
           
-          <code class="ruby">  enum quality: %w(Swill Plausible Genius)</code>
+          <code class="ruby">  enum quality: %w(swill plausible genius)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="8">
@@ -677,8 +683,8 @@
           <code class="ruby">  def titleize</code>
         </li>
       
-        <li class="covered" data-hits="26" data-linenumber="10">
-          <span class="hits">26</span>
+        <li class="covered" data-hits="41" data-linenumber="10">
+          <span class="hits">41</span>
           
           <code class="ruby">    self.title = title.to_s.titleize</code>
         </li>
