@@ -20,4 +20,14 @@ RSpec.describe Idea, type: :model do
   it "has a default quality of swill" do
     expect(idea.quality).to eq("swill")
   end
+
+  it "can have a quality of plausible" do
+    idea.quality = 1
+    expect(idea.quality).to eq("plausible")
+  end
+
+  it "can have a quality of genius" do
+    idea.quality = 2
+    expect(idea.quality).to eq("genius")
+  end
 end

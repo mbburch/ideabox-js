@@ -10,7 +10,7 @@ $(document).ready(function(){
 });
 
 function fetchIdeas(){
-  var newestIdeaID = parseInt($('.idea').last().attr('data-id'))
+  var newestIdeaID = parseInt($('.idea').last().attr('data-id'));
 
   $.ajax({
     type: 'GET',
@@ -20,10 +20,10 @@ function fetchIdeas(){
         if (isNaN(newestIdeaID) || idea.id > newestIdeaID){
           renderIdea(idea)
         }
-      });
+      })
     }
   });
-};
+}
 
 function renderIdea(idea){
   $('#all-ideas').prepend(
@@ -47,15 +47,15 @@ function renderIdea(idea){
     + "<button id='delete-idea' class='btn-floating waves-effect waves-light red darken-4 right'><i class='material-icons'>delete</i></button>"
     + "</div></div></div>"
   )
-};
+}
 
 function truncateBody(body) {
   if (body.length > 100) {
-    return body.replace(/^(.{100}[^\s]*).*/, "$1") + '...'
+    return body.replace(/^(.{100}[^\s]*).*/, '$1') + '...'
   } else {
     return body
   };
-};
+}
 
 function createIdea() {
   $('#create-idea').on('click', function(event){
@@ -81,12 +81,12 @@ function createIdea() {
       }
     });
   });
-};
+}
 
 function clearForm(){
   $('#title').val('')
   $('#body').val('')
-};
+}
 
 function deleteIdea(){
   $('#all-ideas').delegate('#delete-idea', 'click', function(){
@@ -103,7 +103,7 @@ function deleteIdea(){
       }
     });
   });
-};
+}
 
 function searchIdeas() {
   $('#search').keyup(function(){
@@ -116,11 +116,11 @@ function searchIdeas() {
       $(idea).toggle(match);
     });
   });
-};
+}
 
 function thumbsUp() {
-  $("#all-ideas").delegate("#thumbs-up", 'click', function () {
-    var $idea = $(this).closest(".idea");
+  $('#all-ideas').delegate('#thumbs-up', 'click', function () {
+    var $idea = $(this).closest('.idea');
     var quality = event.target.dataset.quality;
     var updated = upQuality(quality);
     var ideaParams = {idea: { quality: updated }};
@@ -131,7 +131,7 @@ function thumbsUp() {
       data: ideaParams,
       success: function(){
         fetchIdeas()
-        console.log("Quality Updated!")
+        console.log('Quality Updated!')
       },
       error: function(xhr){
         console.log(xhr.responseText)
@@ -141,18 +141,18 @@ function thumbsUp() {
 }
 
 function upQuality(quality) {
-  if (quality === "swill") {
-    return "plausible";
-  } else if (quality === "plausible") {
-    return "genius";
+  if (quality === 'swill') {
+    return 'plausible';
+  } else if (quality === 'plausible') {
+    return 'genius';
   } else {
-    return "swill";
+    return 'swill';
   };
 }
 
 function thumbsDown() {
-  $("#all-ideas").delegate("#thumbs-down", 'click', function () {
-    var $idea = $(this).closest(".idea");
+  $('#all-ideas').delegate('#thumbs-down', 'click', function () {
+    var $idea = $(this).closest('.idea');
     var quality = event.target.dataset.quality;
     var updated = downQuality(quality);
     var ideaParams = {idea: { quality: updated }};
@@ -163,7 +163,7 @@ function thumbsDown() {
       data: ideaParams,
       success: function(){
         fetchIdeas()
-        console.log("Quality Updated!")
+        console.log('Quality Updated!')
       },
       error: function(xhr){
         console.log(xhr.responseText)
@@ -173,12 +173,12 @@ function thumbsDown() {
 }
 
 function downQuality(quality) {
-  if (quality === "genius") {
-    return "plausible";
-  } else if (quality === "plausible") {
-    return "swill";
+  if (quality === 'genius') {
+    return 'plausible';
+  } else if (quality === 'plausible') {
+    return 'swill';
   } else {
-    return "swill";
+    return 'swill';
   };
 }
 
@@ -195,7 +195,7 @@ function editTitle() {
           url: '/api/v1/ideas/' + $idea.attr('data-id'),
           data: ideaParams,
           success: function(){
-            console.log("Idea updated.")
+            console.log('Idea updated.')
             fetchIdeas()
           },
           error: function(xhr){
@@ -203,9 +203,9 @@ function editTitle() {
             fetchIdeas()
           }
         });
-      }
-    })
-  })
+      };
+    });
+  });
 }
 
 function editBody() {
@@ -221,7 +221,7 @@ function editBody() {
           url: '/api/v1/ideas/' + $idea.attr('data-id'),
           data: ideaParams,
           success: function(){
-            console.log("Idea updated.")
+            console.log('Idea updated.')
             fetchIdeas()
           },
           error: function(xhr){
@@ -229,7 +229,7 @@ function editBody() {
             fetchIdeas()
           }
         });
-      }
-    })
-  })
+      };
+    });
+  });
 }
