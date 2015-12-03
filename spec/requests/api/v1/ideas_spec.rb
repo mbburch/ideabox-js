@@ -32,6 +32,14 @@ RSpec.describe "Ideas API", type: :request do
       expect(Idea.all.count).to eq 4
       expect(Idea.last.title).to eq("New Title")
     end
+
+    it "does not create idea with invalid attributes" do
+      post "/api/v1/ideas", { idea: {title: "New Title"} }
+
+      expect(response).to have_http_status(422)
+      expect(Idea.all.count).to eq 3
+      expect(Idea.last.title).to eq("My Third Idea")
+    end
   end
 
   context "deletes an idea" do

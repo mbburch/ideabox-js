@@ -188,7 +188,6 @@ function editTitle() {
     var ideaParams  = {idea: { title: ($(this).attr('contenteditable', 'true').text()) }};
     var ideaElement = $(this).attr('contenteditable', 'true')
     ideaElement.focus()
-    debugger
     ideaElement.keypress( function() {
       if (event.which === 13) {
         $.ajax({

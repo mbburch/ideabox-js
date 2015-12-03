@@ -18,6 +18,6 @@ RSpec.describe Idea, type: :model do
   end
 
   it "has a default quality of swill" do
-    expect(idea.quality).to eq("Swill")
+    expect(idea.quality).to eq("swill")
   end
 end
