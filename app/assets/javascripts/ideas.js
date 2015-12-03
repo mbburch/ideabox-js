@@ -1,11 +1,12 @@
 $(document).ready(function(){
   fetchIdeas()
   createIdea()
-  deleteIdea()
   searchIdeas()
+  deleteIdea()
   thumbsUp()
   thumbsDown()
-  editIdea()
+  editTitle()
+  editBody()
 });
 
 function fetchIdeas(){
@@ -29,22 +30,21 @@ function renderIdea(idea){
     "<div class='idea card grey darken-1' data-id='"
     + idea.id
     + "'>"
-    + "<div class='card-content white-text'>"
-    + "<span class='card-title center'>"
+    + "<div class='card-content white-text center'>"
+    + "<span contenteditable='true' class='card-title'>"
     + idea.title
-    + "</span><p class='idea-body'>"
+    + "</span><p contenteditable='true' class='idea-body'>"
     + truncateBody(idea.body)
-    + "</p><p class='idea-quality'><strong>Quality:</strong> "
+    + "</p><br><p class='idea-quality left'><strong>Quality:</strong> "
     + idea.quality
-    + "</p><div class='row buttons'>"
-    + "<button id='delete-idea' class='btn-floating waves-effect waves-light lime darken-2'><i class='material-icons'>delete</i></button>"
-    + "<button id='edit-idea' class='btn-floating waves-effect waves-light lime darken-2'><i class='material-icons'>create</i></button>"
-    + "<button id='thumbs-up' class='btn-floating lime darken-2'><i class='material-icons' data-quality='"
+    + "</p><br><div class='row buttons'>"
+    + "<button id='thumbs-up' class='btn-floating waves-effect waves-light left'><i class='material-icons' data-quality='"
     + idea.quality
     + "'>thumb_up</i></button>"
-    + "<button id='thumbs-down' class='btn-floating lime darken-2'><i class='material-icons' data-quality='"
+    + "<button id='thumbs-down' class='btn-floating waves-effect waves-light left'><i class='material-icons' data-quality='"
     + idea.quality
     + "'>thumb_down</i></button>"
+    + "<button id='delete-idea' class='btn-floating waves-effect waves-light red darken-4 right'><i class='material-icons'>delete</i></button>"
     + "</div></div></div>"
   )
 };
@@ -182,9 +182,55 @@ function downQuality(quality) {
   };
 }
 
-function editIdea() {
-  $("all-ideas").delegate("#edit-idea", 'click', function () {
-    var $idea = $(this).closest(".idea");
-    console.log($idea)
+function editTitle() {
+  $('#all-ideas').delegate('.card-title', 'click', function () {
+    var $idea       = $(this).closest('.idea');
+    var ideaParams  = {idea: { title: ($(this).attr('contenteditable', 'true').text()) }};
+    var ideaElement = $(this).attr('contenteditable', 'true')
+    ideaElement.focus()
+    debugger
+    ideaElement.keypress( function() {
+      if (event.which === 13) {
+        $.ajax({
+          type: 'PUT',
+          url: '/api/v1/ideas/' + $idea.attr('data-id'),
+          data: ideaParams,
+          success: function(){
+            console.log("Idea updated.")
+            fetchIdeas()
+          },
+          error: function(xhr){
+            console.log(xhr.responseText)
+            fetchIdeas()
+          }
+        });
+      }
+    })
+  })
+}
+
+function editBody() {
+  $('#all-ideas').delegate('.idea-body', 'click', function () {
+    var $idea       = $(this).closest('.idea');
+    var ideaParams  = {idea: { body: ($(this).attr('contenteditable', 'true').text()) }};
+    var ideaElement = $(this).attr('contenteditable', 'true')
+    ideaElement.focus()
+    ideaElement.keypress( function() {
+      if (event.which === 13) {
+        $.ajax({
+          type: 'PUT',
+          url: '/api/v1/ideas/' + $idea.attr('data-id'),
+          data: ideaParams,
+          success: function(){
+            console.log("Idea updated.")
+            fetchIdeas()
+          },
+          error: function(xhr){
+            console.log(xhr.responseText)
+            fetchIdeas()
+          }
+        });
+      }
+    })
   })
 }
