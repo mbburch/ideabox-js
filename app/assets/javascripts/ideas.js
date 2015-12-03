@@ -1,25 +1,21 @@
 $(document).ready(function(){
-  fetchIdeas()
-  createIdea()
-  searchIdeas()
-  deleteIdea()
-  thumbsUp()
-  thumbsDown()
-  editTitle()
-  editBody()
+  fetchIdeas();
+  createIdea();
+  searchIdeas();
+  deleteIdea();
+  thumbsUp();
+  thumbsDown();
+  editTitle();
+  editBody();
 });
 
 function fetchIdeas(){
-  var newestIdeaID = parseInt($('.idea').last().attr('data-id'));
-
   $.ajax({
     type: 'GET',
     url:  '/api/v1/ideas',
-    success: function(response){
-      $.each(response, function(index, idea){
-        if (isNaN(newestIdeaID) || idea.id > newestIdeaID){
-          renderIdea(idea)
-        }
+    success: function(ideas){
+      $.each(ideas, function(index, idea){
+        renderIdea(idea)
       })
     }
   });
@@ -67,14 +63,13 @@ function createIdea() {
       }
     };
 
-    clearForm()
-
     $.ajax({
       type: 'POST',
       url: '/api/v1/ideas',
       data: ideaParams,
       success: function(idea){
-        fetchIdeas()
+        renderIdea(idea)
+        clearForm()
       },
       error: function(idea){
         console.log('Does your idea have a title and body?')
@@ -122,16 +117,15 @@ function thumbsUp() {
   $('#all-ideas').delegate('#thumbs-up', 'click', function () {
     var $idea = $(this).closest('.idea');
     var quality = event.target.dataset.quality;
-    var updated = upQuality(quality);
-    var ideaParams = {idea: { quality: updated }};
+    var ideaParams = {idea: { quality: upQuality(quality) }};
 
     $.ajax({
       type: 'PUT',
       url: '/api/v1/ideas/' + $idea.attr('data-id'),
       data: ideaParams,
       success: function(){
-        fetchIdeas()
-        console.log('Quality Updated!')
+        $idea.find('.idea-quality').text('Quality: ' + ideaParams.idea.quality);
+        $idea.attr('data-quality', ideaParams.idea.quality)
       },
       error: function(xhr){
         console.log(xhr.responseText)
@@ -146,7 +140,7 @@ function upQuality(quality) {
   } else if (quality === 'plausible') {
     return 'genius';
   } else {
-    return 'swill';
+    return 'genius';
   };
 }
 
@@ -162,8 +156,8 @@ function thumbsDown() {
       url: '/api/v1/ideas/' + $idea.attr('data-id'),
       data: ideaParams,
       success: function(){
-        fetchIdeas()
-        console.log('Quality Updated!')
+        $idea.find('.idea-quality').text('Quality: ' + ideaParams.idea.quality);
+        $idea.attr('data-quality', ideaParams.idea.quality)
       },
       error: function(xhr){
         console.log(xhr.responseText)
@@ -183,24 +177,26 @@ function downQuality(quality) {
 }
 
 function editTitle() {
-  $('#all-ideas').delegate('.card-title', 'click', function () {
-    var $idea       = $(this).closest('.idea');
-    var ideaParams  = {idea: { title: ($(this).attr('contenteditable', 'true').text()) }};
-    var ideaElement = $(this).attr('contenteditable', 'true')
-    ideaElement.focus()
-    ideaElement.keypress( function() {
-      if (event.which === 13) {
+  $('#all-ideas').on('click', '.card-title', function() {
+    var ideaElement = event.toElement
+    $(this).attr('contenteditable', 'true')
+    .focus()
+    .keypress(function() {
+      if (event.keyCode === 13) {
+        var $idea = $(ideaElement.parentElement.parentElement);
+        var $title = ideaElement.textContent;
+        var ideaParams = {idea: { title: $title }}
+
         $.ajax({
           type: 'PUT',
           url: '/api/v1/ideas/' + $idea.attr('data-id'),
           data: ideaParams,
           success: function(){
-            console.log('Idea updated.')
-            fetchIdeas()
+            console.log("Success")
+            $idea.find('.card-title').text(ideaParams.idea.title);
           },
           error: function(xhr){
             console.log(xhr.responseText)
-            fetchIdeas()
           }
         });
       };
@@ -209,24 +205,26 @@ function editTitle() {
 }
 
 function editBody() {
-  $('#all-ideas').delegate('.idea-body', 'click', function () {
-    var $idea       = $(this).closest('.idea');
-    var ideaParams  = {idea: { body: ($(this).attr('contenteditable', 'true').text()) }};
-    var ideaElement = $(this).attr('contenteditable', 'true')
-    ideaElement.focus()
-    ideaElement.keypress( function() {
-      if (event.which === 13) {
+  $('#all-ideas').on('click', '.idea-body', function() {
+    var ideaElement = event.toElement
+    $(this).attr('contenteditable', 'true')
+    .focus()
+    .keypress(function() {
+      if (event.keyCode === 13) {
+        var $idea = $(ideaElement.parentElement.parentElement);
+        var $body = ideaElement.textContent;
+        var ideaParams = {idea: { body: $body }}
+
         $.ajax({
           type: 'PUT',
           url: '/api/v1/ideas/' + $idea.attr('data-id'),
           data: ideaParams,
           success: function(){
-            console.log('Idea updated.')
-            fetchIdeas()
+            console.log("Success")
+            $idea.find('.idea-body').text(ideaParams.idea.body);
           },
           error: function(xhr){
             console.log(xhr.responseText)
-            fetchIdeas()
           }
         });
       };
