@@ -52,4 +52,14 @@ RSpec.describe "Ideas API", type: :request do
       expect(Idea.all.count).to eq 2
     end
   end
+
+  context "edits an idea" do
+    it "can edit an idea" do
+      put "/api/v1/ideas/#{idea1.id}", { idea: {title: "Updated Title"} }
+
+      expect(response).to have_http_status(204)
+      expect(Idea.all.count).to eq 3
+      expect(Idea.first.title).to eq("Updated Title")
+    end
+  end
 end
