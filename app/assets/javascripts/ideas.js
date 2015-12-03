@@ -2,6 +2,7 @@ $(document).ready(function(){
   fetchIdeas();
   createIdea();
   searchIdeas();
+  qualitySort();
   deleteIdea();
   thumbsUp();
   thumbsDown();
@@ -113,6 +114,15 @@ function searchIdeas() {
   });
 }
 
+function qualitySort() {
+  $('#sort-button').on('click', function(){
+
+    $('.idea').sort(function(a, b) {
+      return $(a).find('.idea-quality').text().toLowerCase().localeCompare($(b).find('.idea-quality').text().toLowerCase());
+    });
+  });
+}
+
 function thumbsUp() {
   $('#all-ideas').delegate('#thumbs-up', 'click', function () {
     var $idea = $(this).closest('.idea');
@@ -178,10 +188,10 @@ function downQuality(quality) {
 
 function editTitle() {
   $('#all-ideas').on('click', '.card-title', function() {
-    var ideaElement = event.toElement
-    $(this).attr('contenteditable', 'true')
-    .focus()
-    .keypress(function() {
+    var ideaElement  = event.toElement;
+    var titleElement = $(this).attr('contenteditable', 'true');
+    titleElement.focus()
+    titleElement.keypress(function() {
       if (event.keyCode === 13) {
         var $idea = $(ideaElement.parentElement.parentElement);
         var $title = ideaElement.textContent;
@@ -206,10 +216,10 @@ function editTitle() {
 
 function editBody() {
   $('#all-ideas').on('click', '.idea-body', function() {
-    var ideaElement = event.toElement
-    $(this).attr('contenteditable', 'true')
-    .focus()
-    .keypress(function() {
+    var ideaElement = event.toElement;
+    var bodyElement = $(this).attr('contenteditable', 'true');
+    bodyElement.focus()
+    bodyElement.keypress(function() {
       if (event.keyCode === 13) {
         var $idea = $(ideaElement.parentElement.parentElement);
         var $body = ideaElement.textContent;
