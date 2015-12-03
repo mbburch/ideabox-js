@@ -3,6 +3,9 @@ $(document).ready(function(){
   createIdea()
   deleteIdea()
   searchIdeas()
+  thumbsUp()
+  thumbsDown()
+  editIdea()
 });
 
 function fetchIdeas(){
@@ -33,17 +36,22 @@ function renderIdea(idea){
     + truncateBody(idea.body)
     + "</p><p class='idea-quality'><strong>Quality:</strong> "
     + idea.quality
-    + "</p><div class='buttons'>"
-    + "<button id='delete-idea' class='btn-floating waves-effect waves-light lime darken-2 left'><i class='material-icons'>delete</i>/button>"
-    + "<button id='thumbs-up' class='btn-floating lime darken-2'><i class='material-icons'>thumb_up</i></button>"
-    + "<button id='thumbs-down' class='btn-floating lime darken-2'><i class='material-icons'>thumb_down</i></button>"
+    + "</p><div class='row buttons'>"
+    + "<button id='delete-idea' class='btn-floating waves-effect waves-light lime darken-2'><i class='material-icons'>delete</i></button>"
+    + "<button id='edit-idea' class='btn-floating waves-effect waves-light lime darken-2'><i class='material-icons'>create</i></button>"
+    + "<button id='thumbs-up' class='btn-floating lime darken-2'><i class='material-icons' data-quality='"
+    + idea.quality
+    + "'>thumb_up</i></button>"
+    + "<button id='thumbs-down' class='btn-floating lime darken-2'><i class='material-icons' data-quality='"
+    + idea.quality
+    + "'>thumb_down</i></button>"
     + "</div></div></div>"
   )
 };
 
 function truncateBody(body) {
   if (body.length > 100) {
-    return body.slice(0, 100) + '...'
+    return body.replace(/^(.{100}[^\s]*).*/, "$1") + '...'
   } else {
     return body
   };
@@ -52,17 +60,14 @@ function truncateBody(body) {
 function createIdea() {
   $('#create-idea').on('click', function(event){
     event.preventDefault();
-    var ideaTitle  = $('#title').val();
-    var ideaBody   = $('#body').val();
     var ideaParams = {
       idea: {
-        title: ideaTitle,
-        body: ideaBody
+        title: $('#title').val(),
+        body: $('#body').val()
       }
     };
 
-    $('#title').val('')
-    $('#body').val('')
+    clearForm()
 
     $.ajax({
       type: 'POST',
@@ -76,6 +81,11 @@ function createIdea() {
       }
     });
   });
+};
+
+function clearForm(){
+  $('#title').val('')
+  $('#body').val('')
 };
 
 function deleteIdea(){
@@ -107,3 +117,74 @@ function searchIdeas() {
     });
   });
 };
+
+function thumbsUp() {
+  $("#all-ideas").delegate("#thumbs-up", 'click', function () {
+    var $idea = $(this).closest(".idea");
+    var quality = event.target.dataset.quality;
+    var updated = upQuality(quality);
+    var ideaParams = {idea: { quality: updated }};
+
+    $.ajax({
+      type: 'PUT',
+      url: '/api/v1/ideas/' + $idea.attr('data-id'),
+      data: ideaParams,
+      success: function(){
+        fetchIdeas()
+        console.log("Quality Updated!")
+      },
+      error: function(xhr){
+        console.log(xhr.responseText)
+      }
+    });
+  });
+}
+
+function upQuality(quality) {
+  if (quality === "swill") {
+    return "plausible";
+  } else if (quality === "plausible") {
+    return "genius";
+  } else {
+    return "swill";
+  };
+}
+
+function thumbsDown() {
+  $("#all-ideas").delegate("#thumbs-down", 'click', function () {
+    var $idea = $(this).closest(".idea");
+    var quality = event.target.dataset.quality;
+    var updated = downQuality(quality);
+    var ideaParams = {idea: { quality: updated }};
+
+    $.ajax({
+      type: 'PUT',
+      url: '/api/v1/ideas/' + $idea.attr('data-id'),
+      data: ideaParams,
+      success: function(){
+        fetchIdeas()
+        console.log("Quality Updated!")
+      },
+      error: function(xhr){
+        console.log(xhr.responseText)
+      }
+    });
+  });
+}
+
+function downQuality(quality) {
+  if (quality === "genius") {
+    return "plausible";
+  } else if (quality === "plausible") {
+    return "swill";
+  } else {
+    return "swill";
+  };
+}
+
+function editIdea() {
+  $("all-ideas").delegate("#edit-idea", 'click', function () {
+    var $idea = $(this).closest(".idea");
+    console.log($idea)
+  })
+}
