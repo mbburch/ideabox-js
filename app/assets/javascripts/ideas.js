@@ -71,9 +71,6 @@ function createIdea() {
       success: function(idea){
         renderIdea(idea)
         clearForm()
-      },
-      error: function(idea){
-        console.log('Does your idea have a title and body?')
       }
     });
   });
@@ -92,10 +89,6 @@ function deleteIdea(){
       url: '/api/v1/ideas/' + $idea.attr('data-id'),
       success: function(){
         $idea.remove()
-      },
-      error: function(){
-        $idea.remove()
-        console.log('Idea was already deleted.')
       }
     });
   });
@@ -126,14 +119,17 @@ function qualitySort() {
 function thumbsUp() {
   $('#all-ideas').delegate('#thumbs-up', 'click', function () {
     var $idea = $(this).closest('.idea');
-    var quality = event.target.dataset.quality;
-    var ideaParams = {idea: { quality: upQuality(quality) }};
-
+    // var quality = event.target.dataset.quality;
+    var quality = $idea.attr('data-quality');
+    // debugger;
+    var newQuality = upQuality(quality)
+    var ideaParams = {idea: { quality: newQuality}};
     $.ajax({
       type: 'PUT',
       url: '/api/v1/ideas/' + $idea.attr('data-id'),
       data: ideaParams,
-      success: function(){
+      success: function(idea){
+        debugger;
         $idea.find('.idea-quality').text('Quality: ' + ideaParams.idea.quality);
         $idea.attr('data-quality', ideaParams.idea.quality)
       },
@@ -157,7 +153,8 @@ function upQuality(quality) {
 function thumbsDown() {
   $('#all-ideas').delegate('#thumbs-down', 'click', function () {
     var $idea = $(this).closest('.idea');
-    var quality = event.target.dataset.quality;
+    // var quality = event.target.dataset.quality;
+    var quality = $idea.attr('data-quality');
     var updated = downQuality(quality);
     var ideaParams = {idea: { quality: updated }};
 
